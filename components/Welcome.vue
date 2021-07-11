@@ -16,7 +16,7 @@
     >
       Copied to clipboard
     </div>
-    <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 text-gray-600">
+    <div class="max-w-4xl w-full mx-auto sm:px-6 lg:px-8 text-gray-600">
       <div class="mt-8 bg-white overflow-hidden shadow sm:rounded-lg p-6">
         <h1 class="text-3xl font-semibold tracking-wide">
           CraftCMS Password Generator
