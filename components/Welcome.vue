@@ -39,6 +39,9 @@
       <div class="mt-8 bg-white overflow-hidden shadow sm:rounded-lg p-6">
         <QuickPasswords />
       </div>
+      <div class="mt-8 bg-white overflow-hidden shadow sm:rounded-lg p-6">
+        <CLIVersion />
+      </div>
       <div class="flex justify-center py-6 space-x-2">
         <a
           href="https://github.com/JamesNock/CraftCMSPasswordGenerator"
