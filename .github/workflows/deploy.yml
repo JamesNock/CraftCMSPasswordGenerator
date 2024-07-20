@@ -31,7 +31,7 @@ jobs:
           npm run generate
 
       - name: Copy with rsync
-        run: rsync -avz --delete ./dist/* ${{ secrets.LIGHTSAIL_USER }}@${{ secrets.LIGHTSAIL_HOST }}:laravelseedergenerator/${{ github.sha }}
+        run: rsync -avz --delete ./dist/* ${{ secrets.LIGHTSAIL_USER }}@${{ secrets.LIGHTSAIL_HOST }}:craftcmspwgen/${{ github.sha }}
 
       - name: Launch
         env:
