@@ -26,6 +26,8 @@ jobs:
           node-version-file: '.nvmrc'
 
       - name: Install dependencies and build
+        env:
+           API_URL: https://craftcmspwgen.james-nock.co.uk
         run: |
           npm install
           npm run generate
