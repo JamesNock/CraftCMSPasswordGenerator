@@ -27,7 +27,7 @@ jobs:
 
       - name: Install dependencies and build
         env:
-           API_URL: https://craftcmspwgen.james-nock.co.uk
+           API_URL: https://www.james-nock.co.uk
         run: |
           npm install
           npm run generate
