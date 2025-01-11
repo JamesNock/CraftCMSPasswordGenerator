@@ -43,7 +43,7 @@
         run the below:
       </p>
       <p class="mt-4 p-2 font-mono bg-yellow-300" @click="copyThis">
-        UPDATE `users`<br />SET password="{{ hashedPW }}"<br />WHERE id="<span
+        UPDATE `users`<br />SET password="{{ hashedPW }}"<br />WHERE id=<span
           class="
             px-1
             w-8
@@ -56,7 +56,7 @@
           contenteditable="true"
           @click.prevent="prevent"
         ></span
-        >";
+        >;
       </p>
       <p class="mt-4">
         <span class="font-bold">Tip</span>: type in the user ID above and then
