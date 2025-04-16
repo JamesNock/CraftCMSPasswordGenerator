@@ -65,52 +65,69 @@
     </div>
   </div>
 </template>
-<script>
-export default {
-  data() {
-    return {
-      password: '',
-      hashedPW: '',
-      errorMsg: '',
-      fetching: false,
-    }
-  },
-  methods: {
-    prevent(event) {
-      event.stopPropagation()
-    },
-    async fetch() {
-      if (!this.password) {
-        this.errorMsg = 'Please enter a password. e.g. password'
-        setTimeout(() => {
-          this.errorMsg = ''
-        }, 5000)
-        return
-      }
-      this.hashedPW = 'Fetching...'
-      this.fetching = true
-      this.errorMsg = ''
-      const formData = new FormData()
-      formData.append('pw', this.password)
-      await this.$axios({
-        method: 'post',
-        url: 'tools/craftcmspwgen.php',
-        data: formData,
-        headers: { 'Content-Type': 'multipart/form-data' },
-      })
-        .then((res) => {
-          if (!res.data.error) {
-            this.hashedPW = res.data.message
-          } else {
-            this.hashedPW = ''
-            this.errorMsg = res.data.message
-          }
-          this.fetching = false
-        })
-    },
-    copyThis(event) {
-      this.$nuxt.$emit('copyThis', event.target)
-    },
-  },
+
+<script setup>
+import {useFetch} from "#app";
+import { ref } from 'vue'
+
+const password = ref('')
+const hashedPW = ref('')
+const errorMsg = ref('')
+const fetching = ref(false)
+
+const prevent = (event) => {
+  event.stopPropagation()
+}
+
+const API_URL = 'https://www.james-nock.co.uk/tools/craftcmspwgen.php'
+
+const generateHashedPassword = async (password) => {
+  const formData = new FormData()
+  formData.append('pw', password)
+
+  const { data, error } = await useFetch(API_URL, {
+    method: 'POST',
+    body: formData,
+  })
+
+  if (error.value) {
+    throw error.value
+  }
+
+  const res = JSON.parse(data.value)
+  
+  if (res.error) {
+    throw new Error(res.message)
+  }
+
+  return res.message
+}
+
+const fetch = async () => {
+  if (!password.value) {
+    errorMsg.value = 'Please enter a password. e.g. password'
+    setTimeout(() => {
+      errorMsg.value = ''
+    }, 5000)
+    return
+  }
+
+  hashedPW.value = 'Fetching...'
+  fetching.value = true
+  errorMsg.value = ''
+
+  try {
+    hashedPW.value = await generateHashedPassword(password.value)
+  } catch (error) {
+    hashedPW.value = ''
+    errorMsg.value = error.message || 'An error occurred while fetching the password'
+  } finally {
+    fetching.value = false
+  }
+}
+
+const copyThis = (event) => {
+  const { $bus } = useNuxtApp()
+  $bus.emit('copyThis', event.target)
 }
 </script>

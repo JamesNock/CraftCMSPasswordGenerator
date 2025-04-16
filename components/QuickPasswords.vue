@@ -45,17 +45,11 @@
     </table>
   </div>
 </template>
-<script>
-export default {
-  data() {
-    return {
-      // any component data
-    }
-  },
-  methods: {
-    copyThis(event) {
-      this.$nuxt.$emit('copyThis', event.target)
-    },
-  },
+
+<script setup>
+const nuxtApp = useNuxtApp()
+
+const copyThis = (event) => {
+  nuxtApp.$emit('copyThis', event.target)
 }
 </script>
