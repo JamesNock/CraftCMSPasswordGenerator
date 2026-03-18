@@ -47,9 +47,9 @@
 </template>
 
 <script setup>
-const nuxtApp = useNuxtApp()
+const { $bus } = useNuxtApp()
 
 const copyThis = (event) => {
-  nuxtApp.$emit('copyThis', event.target)
+  $bus.emit('copyThis', event.target)
 }
 </script>
